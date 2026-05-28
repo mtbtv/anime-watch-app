@@ -1,0 +1,124 @@
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.carousel-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scroll-padding-left: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 200px;
+  min-width: 200px;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--accent-color), #ff6b9d);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(135deg, #ff6b9d, var(--accent-color));
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.5);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-btn-left {
+  left: -25px;
+}
+
+.carousel-btn-right {
+  right: -25px;
+}
+
+@media (max-width: 1024px) {
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .carousel-btn-left {
+    left: 0;
+  }
+
+  .carousel-btn-right {
+    right: 0;
+  }
+
+  .carousel-container {
+    gap: 15px;
+  }
+
+  .carousel-item {
+    flex: 0 0 180px;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .carousel-item {
+    flex: 0 0 150px;
+    min-width: 150px;
+  }
+
+  .carousel-container {
+    gap: 12px;
+    padding: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .carousel-item {
+    flex: 0 0 120px;
+    min-width: 120px;
+  }
+
+  .carousel-container {
+    gap: 10px;
+  }
+}
