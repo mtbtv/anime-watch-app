@@ -1,16 +1,35 @@
-# Anime Watch App
+# Anime Watch App - Android TV Remote Friendly
 
-A modern anime watching website built with React and AniList API. Features multiple carousels for popular, trending, and most-watched anime.
+A modern anime watching website built with React and AniList API. **Fully optimized for Android TV remote control navigation** with multiple carousels for popular, trending, and most-watched anime.
 
-## Features
+## 🎮 Features
 
-- 🎬 **Popular Anime Carousel** - Display trending popular anime
+### TV Remote Control Features
+- ⬆️⬇️ **Vertical Navigation** - Move between carousels with up/down arrows
+- ⬅️➡️ **Horizontal Navigation** - Scroll through anime with left/right arrows
+- ✓ **Select/Play** - Press enter to select and play anime
+- 📺 **Visual Focus Indicators** - Clear focus indicators for TV viewing
+- 🎯 **Smart Focus Management** - Auto-scroll focused items into view
+- 📊 **Section Indicators** - Shows which carousel is currently active
+
+### Anime Features
+- 🔥 **Popular Anime Carousel** - Display trending popular anime
 - 📺 **Most Watched Anime Carousel** - Show most-watched anime series
 - ⭐ **Top Rated Anime Carousel** - Featured top-rated anime
+- 🎬 **Trending Now Carousel** - Currently trending anime
 - 🔍 **Search Functionality** - Search for your favorite anime
-- 📱 **Responsive Design** - Works on all devices
+- 📱 **Responsive Design** - Works on all devices including TV
 - 🎨 **Modern UI** - Beautiful and intuitive interface with smooth animations
-- 🔥 **Trending Carousel** - Display currently trending anime
+
+## 🕹️ Remote Control Guide
+
+| Button | Action |
+|--------|--------|
+| **⬆️ UP** | Move to previous carousel section |
+| **⬇️ DOWN** | Move to next carousel section |
+| **⬅️ LEFT** | Scroll carousel left / Previous anime |
+| **➡️ RIGHT** | Scroll carousel right / Next anime |
+| **✓ ENTER** | Select and play anime |
 
 ## Tech Stack
 
@@ -19,6 +38,7 @@ A modern anime watching website built with React and AniList API. Features multi
 - **API**: AniList GraphQL API
 - **HTTP Client**: Axios
 - **Styling**: CSS3 with gradients and animations
+- **Remote Control**: Keyboard event handling for TV remotes
 
 ## Getting Started
 
@@ -26,6 +46,7 @@ A modern anime watching website built with React and AniList API. Features multi
 
 - Node.js (v14 or higher)
 - npm or yarn
+- An Android TV or device with remote control capability
 
 ### Installation
 
@@ -47,29 +68,72 @@ npm run dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
+### Deploying to Android TV
+
+1. Build for production:
+```bash
+npm run build
+```
+
+2. Deploy to a web server or use services like:
+   - Vercel
+   - Netlify
+   - Firebase Hosting
+
+3. Access from your Android TV by:
+   - Opening the browser (Chrome, Firefox)
+   - Navigating to your app URL
+   - Using your TV remote to control
+
 ## Project Structure
 
 ```
 anime-watch-app/
 ├── src/
 │   ├── components/
-│   │   ├── Carousel.jsx       # Carousel component
-│   │   ├── AnimeCard.jsx      # Anime card component
-│   │   └── Header.jsx         # Header with search
+│   │   ├── Carousel.jsx       # TV-friendly carousel
+│   │   ├── AnimeCard.jsx      # Card with focus states
+│   │   ├── Header.jsx         # Header component
+│   │   └── RemoteGuide.jsx    # Remote control guide overlay
+│   ├── hooks/
+│   │   └── useRemoteControl.js # Remote control handler
 │   ├── services/
 │   │   └── anilist.js         # AniList API service
 │   ├── styles/
 │   │   ├── App.css            # Main app styles
-│   │   ├── Carousel.css       # Carousel styles
-│   │   ├── AnimeCard.css      # Card styles
-│   │   └── Header.css         # Header styles
+│   │   ├── Carousel.css       # Carousel with TV focus
+│   │   ├── AnimeCard.css      # Card focus effects
+│   │   ├── Header.css         # Header styles
+│   │   └── RemoteGuide.css    # Guide overlay styles
 │   ├── App.jsx                # Main app component
 │   └── main.jsx               # Entry point
-├── index.html                  # HTML template
-├── vite.config.js             # Vite configuration
-├── package.json               # Dependencies
-└── README.md                  # This file
+├── index.html                 # HTML template
+├── vite.config.js            # Vite configuration
+├── package.json              # Dependencies
+└── README.md                 # This file
 ```
+
+## TV Remote Control Implementation
+
+### useRemoteControl Hook
+The app uses a custom React hook to handle remote control input:
+
+- Arrow keys (⬆️⬇️⬅️➡️) for navigation
+- Enter key (✓) for selection
+- Automatic state management for focused items
+- Smooth scrolling and transitions
+
+### Focus Management
+- Active carousel is highlighted with visual border
+- Focused cards have scale effect and glow
+- Auto-scroll ensures focused items are visible
+- Section indicators show current position
+
+### Visual Feedback
+- Pulse animation on focused cards
+- Border highlight for active sections
+- Glow effects for better TV visibility
+- Large touch targets for remote control
 
 ## API Documentation
 
@@ -82,33 +146,13 @@ This project uses the [AniList API](https://anilist.co/graphiql) for fetching an
 3. **Top Rated** - Highest rated anime sorted by score
 4. **Most Watched** - Most watched anime on AniList
 
-## Features
-
-### Carousel Navigation
-- Smooth horizontal scrolling
-- Left/Right navigation buttons
-- Responsive design for all screen sizes
-- Smooth scroll behavior
-
-### Anime Cards
-- High-quality anime cover images
-- Rating display
-- Episode count
-- Anime status (Ongoing/Completed)
-- Description preview
-- Watch button
-
-### Header
-- Logo with gradient effect
-- Search bar (expandable design)
-- Navigation links
-- Sticky positioning
-
 ## Building for Production
 
 ```bash
 npm run build
 ```
+
+The build output will be in the `dist/` directory.
 
 ## Preview Production Build
 
@@ -134,9 +178,42 @@ Edit the CSS variables in `src/styles/App.css`:
 }
 ```
 
-### API Queries
+### Remote Control Keys
 
-Modify queries in `src/services/anilist.js` to customize the data fetched from AniList.
+Modify key handlers in `src/hooks/useRemoteControl.js` to support:
+- Numeric keys (0-9) for quick access
+- Color buttons (RED, GREEN, YELLOW, BLUE)
+- Play/Pause buttons
+- Custom remote commands
+
+### Focus Effects
+
+Adjust focus animations in CSS files:
+- `src/styles/AnimeCard.css` - Card focus effects
+- `src/styles/Carousel.css` - Carousel active state
+- `src/styles/App.css` - Section indicators
+
+## Browser Compatibility
+
+- ✅ Chrome/Chromium (Android TV)
+- ✅ Firefox (Android TV)
+- ✅ Edge
+- ✅ Safari (macOS/iOS)
+- ✅ Desktop browsers
+
+## Performance Tips for TV
+
+1. **Optimize Images**
+   - AniList images are already optimized
+   - Consider lazy loading for more carousels
+
+2. **Network**
+   - Use CDN for faster delivery
+   - Consider caching strategies
+
+3. **Rendering**
+   - Minimal animations on TV devices
+   - Efficient CSS for large screens
 
 ## License
 
@@ -152,4 +229,21 @@ For support, please open an issue on the GitHub repository.
 
 ## Live Demo
 
-Check out the live demo at: https://anime-watch-app.vercel.app (Deploy your own!)
+Deploy and access from your Android TV at your hosting URL!
+
+## Troubleshooting
+
+### Remote keys not working?
+- Ensure your TV browser supports keyboard events
+- Check if remote is properly paired
+- Try using mouse/trackpad as alternative
+
+### Focus not visible?
+- Adjust `--border-color` and `--accent-color` for better visibility
+- Increase font sizes in TV settings
+- Use TV's picture modes for optimal display
+
+### Anime not loading?
+- Check internet connection
+- Verify AniList API is accessible
+- Check browser console for errors
